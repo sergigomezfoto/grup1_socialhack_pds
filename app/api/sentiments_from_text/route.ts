@@ -16,7 +16,7 @@ export async function POST(req: Request) {
 
     const { word } = await req.json();
 
-    //   1 DIVIDIR EN EMOCIONS EL TEXT I OBTENIR UN OBJECTE///////////////////////////////////////////////////////////
+    //   1 DIVIDIR EN EMOCIONS EL TEXT I OBTENIR UN OBJECTE ///////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     let finalReport = {report:'',alarm:null};
     const getEmotionSegments = async (text) => {
@@ -24,7 +24,7 @@ export async function POST(req: Request) {
         const response = await openai.chat.completions.create({
             model: "gpt-4-1106-preview",
             messages: [
-                {
+                {   //PROMPT AI
                     role: "system",
                     content: `You are very reputed and espert psicologist, that can analyze and split a text by emotional transitions, avoiding segmenting based on grammatical indicators like commas or periods. You can also detect if the text denotes any alarm that indicates emotional disorders. Please divide the following text into segments based on changes in emotion. Use the format "segment || segment || segment" to indicate the importance of each segment, and separate multiple segments with "||".(Avoid segmenting based on grammatical indicators like commas or periods; prioritize emotional transitions instead). Think about which emotion is the dominant one for the entire text and evaluate each segment based on how well it represents that emotion.At the end of the text, add: *** very brief emotional summary of the text as a whole, not segmented. Include in ths emotional summary is si there any alarm in terms of emotional disorder. If you consider that there is any alarm follow the 'EXAMPLE (with alarms)' and divide the summary like this: summary|ALARM|alarms (write explicity '|ALARM|' to split the summary). otherwhise follow the 'EXAMPLE (without alarms)', and don't divide the summary.
                     
@@ -45,6 +45,8 @@ export async function POST(req: Request) {
             temperature: 0,
         });
         let content = response.choices[0].message.content;
+        console.log(content);
+        // OBTENCIO DE L'OBJECTE
         const [mainContent, globalReport] = content.split('***');
         content = mainContent;
         if (globalReport.includes('|ALARM|')) {
@@ -55,35 +57,14 @@ export async function POST(req: Request) {
             finalReport.report = globalReport.trim();
             finalReport.alarm = null;
         }
-       
-
-        console.log('content: ',content);
-        
-        // Comprova si la resposta conté el separador
-        // if (!content.includes("||")) {
-        //     // Gestiona el cas en què no es pot dividir el text
-        //     console.error(`${response.model} no ha pogut dividir el text.`);
-        //     const segment = content.split("[")[0].trim();
-        //     const score = parseFloat(content.split("[")[1].split("]")[0]);
-        //     return [{ segment,
-        //         //  importance: score 
-        //         }];
-        // }
-
-        // console.log(content);
-        // const segmentsWithScores = content.split("||").map((segmentWithScore) => {
-        //     const segment = segmentWithScore.split("[")[0].trim();
-        //     const score = parseFloat(segmentWithScore.split("[")[1].split("]")[0]);
-        //     return { segment,  importance: score 
-        //     };
-        // });
+        console.log('content: ',content);       
         const segments = content.split("||").map((segment) => {
             return { segment: segment.trim() };
         });
         return segments;
     };
 
-    //   2.-TROBA TOTES LES EMOCIONS RELACIONADES AMB EL OBJECTE EN CADA EMOCIO///////////////////////////////////////
+    //   2.-COMFRONTACIÓ SEGMENTS OBJECTE EMOCIONS ( CERCA SEMÀNTICA )///////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////    
     const preprocessText = text => text.toLowerCase().replace(/[^\w\s]/gi, '');
 
@@ -140,7 +121,9 @@ export async function POST(req: Request) {
 
         return filteredResults;
     };
-
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+// TRIGGER GENERAL
 
     const analyzeTextEmotions = async () => {
         console.log("Analyzing text emotions...", word);
@@ -149,9 +132,7 @@ export async function POST(req: Request) {
         const response={
             segments:segmentEmotions,
             finalReport:finalReport
-        }
-    //    console.log(response);
-       
+        }      
         return response
     };
 

@@ -5,6 +5,112 @@
 
 body {
   color: white;
-  background-color:#1a202c; 
-    
+  background-color: #1a202c;
+
+}
+
+
+.ira {
+  color: #000000;
+  background-color: #92B8BC;
+}
+
+.confianza {
+  color: #000000;
+  background-color: #EAB2D3;
+}
+
+.neutral {
+  color: #000000;
+  background-color: #E49A96;
+}
+
+.vigilancia {
+  color: #000000;
+  background-color: #C696AE;
+}
+
+.tristeza {
+  color: #000000;
+  background-color: #81B0C4;
+}
+
+.optimismo {
+  color: #000000;
+  background-color: #F49794;
+}
+
+.remordimiento {
+  color: #000000;
+  background-color: #FBCCB1;
+}
+
+.admiracion {
+  color: #000000;
+  background-color: #F48AC2;
+}
+
+.serenidad {
+  color: #000000;
+  background-color: #E7C5E2;
+}
+
+.sorpresa {
+  color: #000000;
+  background-color: #CA85D6;
+}
+
+.asco {
+  color: #000000;
+  background-color: #B1C3EA;
+}
+
+.distracion {
+  color: #000000;
+  background-color: #CCFBA6;
+}
+
+.pena {
+  color: #000000;
+  background-color: #D584C9;
+}
+
+.amor {
+  color: #000000;
+  background-color: #C6A6BF;
+}
+
+.alegria {
+  color: #000000;
+  background-color: #E9FB88;
+}
+
+.asombro {
+  color: #000000;
+  background-color: #C8D8D8;
+}
+
+.miedo {
+  color: #000000;
+  background-color: #EBA290;
+}
+
+.decepcion {
+  color: #000000;
+  background-color: #FB868C;
+}
+
+.extasis {
+  color: #000000;
+  background-color: #9D8EDA;
+}
+
+.aprobacion {
+  color: #000000;
+  background-color: #AAF7F3;
+}
+
+.agresidad {
+  color: #000000;
+  background-color: #FAD7A3;
 }
