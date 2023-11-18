@@ -13,7 +13,7 @@ const YouTubeInputPlayer: React.FC<{}> = ({ }) => {
     if (url.length > 0) {
       const urlString = extractYouTubeVideoID(url);
       const str = await scrapeYoutubeSubtitles(urlString);
-      console.log('AIXÒ ÉS EL STRING: ',str);
+      console.log('AIXÒ ÉS EL STRING: ',str );
       
     } else {
       console.log('no url');
