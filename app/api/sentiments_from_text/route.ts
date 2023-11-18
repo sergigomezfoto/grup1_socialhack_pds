@@ -2,7 +2,7 @@ import { MemoryVectorStore } from "langchain/vectorstores/memory";
 import { OpenAIEmbeddings } from "langchain/embeddings/openai";
 import { OpenAI } from 'openai'
 import { NextResponse } from 'next/server';
-import emotionalStates from './_emotionalStates__complert'
+import emotionalStates from './_emotionalStates_defs.js'
 import { Document } from "langchain/document";
 
 
@@ -34,7 +34,7 @@ export async function POST(req: Request) {
                     EXAMPLE (with alarms): user: I'm feeling very sad today, my friend is ill... I love him a lot... life is so hard that I can't take it anymore!
                     system: I'm feeling very sad today, my friend is ill...|| I love him a lot...||life is so hard that I can't take it anymore! *** The text denotes a lot of sadness due to a friend's illness. |ALARM| Depression and risks to integrity.
                     
-                    IMPORTANT: If you can't divide the text, return the same text with an importance score, but with the brief emotional summary.
+                    IMPORTANT: If you can't divide the text, return the same text with an importance score, but with the brief emotional summary. Your messge MUST BE in SPANISH.
                     `,
                 },
                 {

@@ -44,7 +44,7 @@ const DocxReader: React.FC = () => {
         <>
             <div className=" flex justify-start items-center flex-col m-6">
                 <input type="file" onChange={handleFileChange} accept=".docx" className="block" />
-                {(extText && !data) && <div className="my-6"> {extText}</div>}
+                {(extText && !data) && <><h1 className="text-3xl mt-6">TEXTO EXTRAIDO</h1><div className="my-6 px-[30px]"> {extText}</div></>}
             {data && <ReportComponent data={data} />}
             </div>
         </>
