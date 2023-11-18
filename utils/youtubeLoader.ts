@@ -51,7 +51,7 @@ export const scrapeYoutubeSubtitles = async (videoId: string) => {
 const res = await response.json();
 // console.log(res.message);
 
-return `data:audio/mpeg;base64,${res.message}`;
+return res.message;
 
 
 }

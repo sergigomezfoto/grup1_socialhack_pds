@@ -1,16 +1,30 @@
 'use client'
+import { extractYouTubeVideoID, scrapeYoutubeSubtitles } from '@/utils/youtubeLoader';
 import React, { useState, useEffect } from 'react';
 import ReactPlayer from 'react-player';
 
 
-const YouTubeInputPlayer: React.FC<{ onUrlChange: (url: string) => void, playTime?: number }> = ({ onUrlChange, playTime }) => {
+const YouTubeInputPlayer: React.FC<{}> = ({ }) => {
   const [url, setUrl] = useState('');
 
 
+  const handleUrlChange = async (url: string) => {
+
+    if (url.length > 0) {
+      const urlString = extractYouTubeVideoID(url);
+      const str = await scrapeYoutubeSubtitles(urlString);
+      console.log('AIXÒ ÉS EL STRING: ',str);
+      
+    } else {
+      console.log('no url');
+    }
+
+  };
   useEffect(() => {
-    onUrlChange(url);
-    console.log('cambi de url de s de dintre');
-  }, [url, onUrlChange]);
+    if (url.length > 0) {
+      handleUrlChange(url);
+    }
+  }, [url]);
 
   return (
     <div className="flex flex-col items-center justify-center p-5 space-y-4">

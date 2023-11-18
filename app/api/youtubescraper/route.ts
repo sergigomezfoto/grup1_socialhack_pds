@@ -20,5 +20,5 @@ export async function POST(req: Request) {
         return []; // Retorna un array buit si cap idioma funciona
     }
     const subtitles = await getSubtitlesWithFallback(videoId, languages);
-    return NextResponse.json({ message:'ei!!!!'});
+    return NextResponse.json({ message:createCondensedSubtitleString(subtitles)});
 }
