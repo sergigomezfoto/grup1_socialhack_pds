@@ -1,20 +1,28 @@
 'use client'
+import launchWordSentiments from '@/utils/launchWordSentiments';
+import mergeContiguousSimilarEmotions from '@/utils/mergeContigous';
 import { extractYouTubeVideoID, scrapeYoutubeSubtitles } from '@/utils/youtubeLoader';
 import React, { useState, useEffect } from 'react';
 import ReactPlayer from 'react-player';
+import ReportComponent from './wordReport';
 
 
 const YouTubeInputPlayer: React.FC<{}> = ({ }) => {
   const [url, setUrl] = useState('');
-
+  const [strin, setStrin] = useState(null);
+  const [data, setData] = useState(null);
 
   const handleUrlChange = async (url: string) => {
 
     if (url.length > 0) {
       const urlString = extractYouTubeVideoID(url);
       const str = await scrapeYoutubeSubtitles(urlString);
-      console.log('AIXÒ ÉS EL STRING: ',str );
-      
+      console.log('AIXÒ ÉS EL STRING: ', str);
+      setStrin(str);
+      launchWordSentiments(str).then((res) => {
+        console.log('log al final::', res.analizeSentiments);
+        setData(mergeContiguousSimilarEmotions(res.analizeSentiments));
+      });
     } else {
       console.log('no url');
     }
@@ -47,7 +55,8 @@ const YouTubeInputPlayer: React.FC<{}> = ({ }) => {
         }}
         controls={true}
       />}
-
+      {(strin && !data) && <><h1 className="text-3xl mt-6">TEXTO EXTRAIDO</h1><div className="my-6 px-[30px]"> {strin}</div></>}
+      {data && <ReportComponent data={data} />}
     </div>
   );
 };
