@@ -1,18 +1,16 @@
+import DocxReader from "@/app/_components/WordExtractor";
 
-import ChatComponent from '@/app/_components/chatbox';
 
 
-const analizer = () => {
 
+const wordSentiments = () => {
 
 
     return (
-        <main className="flex min-h-screen flex-col items-center justify-between p-24">
-            <div className="bg-slate-800 p-3 w-[800px] rounded-md text-white">
-                <ChatComponent />
-            </div>
-        </main>
-    )
-}
+        <div>
+            <DocxReader/>
+        </div>
+    );
+};
 
-export default analizer;
+export default wordSentiments;
