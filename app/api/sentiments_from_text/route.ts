@@ -18,7 +18,7 @@ export async function POST(req: Request) {
 
     //   1 DIVIDIR EN EMOCIONS EL TEXT I OBTENIR UN OBJECTE ///////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    let finalReport = {report:'',alarm:null};
+    let finalReport = { report: '', alarm: null };
     const getEmotionSegments = async (text) => {
 
         const response = await openai.chat.completions.create({
@@ -46,18 +46,18 @@ export async function POST(req: Request) {
         });
         let content = response.choices[0].message.content;
         console.log(content);
-        // OBTENCIO DE L'OBJECTE
+        // OBTENCIO i DEPURACIO DEL L'OBJECTE
         const [mainContent, globalReport] = content.split('***');
         content = mainContent;
         if (globalReport.includes('|ALARM|')) {
             const parts = globalReport.split('|ALARM|');
             finalReport.report = parts[0].trim();
             finalReport.alarm = parts[1].trim();
-        }else{
+        } else {
             finalReport.report = globalReport.trim();
             finalReport.alarm = null;
         }
-        console.log('content: ',content);       
+        console.log('content: ', content);
         const segments = content.split("||").map((segment) => {
             return { segment: segment.trim() };
         });
@@ -74,9 +74,9 @@ export async function POST(req: Request) {
         let emotionsObject = {};
         emotionalResults.forEach(result => {
             // Separem el contingut de la pàgina en el títol i la descripció
-            const [titleLine, ...descriptionLines] = result[0].pageContent.split('\n');    
+            const [titleLine, ...descriptionLines] = result[0].pageContent.split('\n');
             // Extraurem el títol netejant la cadena de text
-            const title = titleLine.replace('Title: ', '').trim().toLowerCase();  
+            const title = titleLine.replace('Title: ', '').trim().toLowerCase();
             // Unim les línies de la descripció en una sola cadena de text
             const description = descriptionLines.join(' ').trim();
             emotionsObject = {
@@ -88,14 +88,13 @@ export async function POST(req: Request) {
                 score: result[1] * 1
                 // segmentObj.importance
             };
-    
+
         });
-        console.log('emotions:',emotionsObject);
+        console.log('emotions:', emotionsObject);
         return emotionsObject;
     };
     const createStore = async () =>
         MemoryVectorStore.fromDocuments(
-            // @ts-ignore
             emotionalStates.map(
                 (emotion) =>
                     new Document({
@@ -112,7 +111,6 @@ export async function POST(req: Request) {
         const results = await store.similaritySearchWithScore(query, count);
         const sortedResults = results.sort((a, b) => b[1] - a[1]);
         const mostSimilar = sortedResults[0];
-
         const filteredResults = sortedResults.filter(result => {
             if (result[0] === mostSimilar[0]) return true;
             const difference = Math.abs(mostSimilar[1] - result[1]);
@@ -121,24 +119,24 @@ export async function POST(req: Request) {
 
         return filteredResults;
     };
-////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-// TRIGGER GENERAL
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////
+    // TRIGGER GENERAL
 
     const analyzeTextEmotions = async () => {
         console.log("Analyzing text emotions...", word);
         const segments = await getEmotionSegments(word);
-        const segmentEmotions = await Promise.all(segments.map(segment => findEmotionsInText(segment)));     
-        const response={
-            segments:segmentEmotions,
-            finalReport:finalReport
-        }      
+        const segmentEmotions = await Promise.all(segments.map(segment => findEmotionsInText(segment)));
+        const response = {
+            segments: segmentEmotions,
+            finalReport: finalReport
+        }
         return response
     };
 
     const res = await analyzeTextEmotions();
     console.log(res);
-    
+
     return NextResponse.json({ analizeSentiments: res })
 
 }

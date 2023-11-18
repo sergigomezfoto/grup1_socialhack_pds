@@ -6,10 +6,10 @@ import { Document } from "langchain/document";
 
 export const extractYouTubeVideoID =(url: string): string =>{
     // Comprova si l'URL és vàlida
+    console.log(url)
     if (!url) return 'fail';
-  
     // Expressió regular per a les dues formes de URLs de YouTube
-    const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+    const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=|shorts\/)([^#\&\?]*).*/;
     const match = url.match(regExp);
   
     if (match && match[2].length === 11) {
@@ -42,22 +42,23 @@ export const extractYouTubeVideoID =(url: string): string =>{
   
     return condensedText.trim();
   }
-  export function createObjectsFromTimedText(text: string) {
-    const regex = /\[(\d+\.\d+)\](.*?)(?=\[\d+\.\d+\]|$)/gs;
-    const parts = [];
-    let match;
 
-    while ((match = regex.exec(text)) !== null) {
-        const temps = parseFloat(match[1]);
-        const contingut = match[2].trim();
+  // export function createObjectsFromTimedText(text: string) {
+  //   const regex = /\[(\d+\.\d+)\](.*?)(?=\[\d+\.\d+\]|$)/gs;
+  //   const parts = [];
+  //   let match;
 
-        const doc = new Document({
-            pageContent: contingut,
-            metadata: { time: temps }
-        });
+  //   while ((match = regex.exec(text)) !== null) {
+  //       const temps = parseFloat(match[1]);
+  //       const contingut = match[2].trim();
 
-        parts.push(doc);
-    }
+  //       const doc = new Document({
+  //           pageContent: contingut,
+  //           metadata: { time: temps }
+  //       });
 
-    return parts;
-  }
+  //       parts.push(doc);
+  //   }
+
+  //   return parts;
+  // }
