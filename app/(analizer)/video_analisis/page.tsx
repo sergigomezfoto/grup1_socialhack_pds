@@ -2,17 +2,18 @@
 
 
 import YouTubeInputPlayer from '@/app/_components/videoExtractor';
-import { extractYouTubeVideoID } from '@/utils/youtubeLoader';
+import { extractYouTubeVideoID, scrapeYoutubeSubtitles } from '@/utils/youtubeLoader';
 
 
 
 const blockChat = () => {
 
-  const handleUrlChange = (url: string) => {
+  const handleUrlChange = async(url: string) => {
 
     if (url.length > 0) {
       const urlString = extractYouTubeVideoID(url);
-      console.log(urlString);
+      const str =await scrapeYoutubeSubtitles(urlString);
+      console.log(str);
     }else{
       console.log('no url');
     }

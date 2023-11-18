@@ -2,7 +2,7 @@ import { MemoryVectorStore } from "langchain/vectorstores/memory";
 import { OpenAIEmbeddings } from "langchain/embeddings/openai";
 import { OpenAI } from 'openai'
 import { NextResponse } from 'next/server';
-import emotionalStates from './_emotionalStates'
+import emotionalStates from './_emotionalStates__complert'
 import { Document } from "langchain/document";
 
 

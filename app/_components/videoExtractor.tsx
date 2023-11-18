@@ -1,5 +1,5 @@
 'use client'
-import React, { useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import ReactPlayer from 'react-player';
 
 
@@ -19,7 +19,7 @@ const YouTubeInputPlayer: React.FC<{ onUrlChange: (url: string) => void, playTim
         value={url}
         onChange={(e) => setUrl(e.target.value)}
         placeholder="Introdueix l'URL de YouTube aquí"
-        className="px-4 py-2 border rounded shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent color-black"
+        className="px-4 py-2 border rounded shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-black"
       />
       {url && <ReactPlayer url={url}
 
