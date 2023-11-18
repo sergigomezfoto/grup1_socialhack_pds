@@ -38,10 +38,10 @@ const emotionalStates = [
   { description: "Mauston y Monticello fueron el principio y el fin de mi esperanza", title: "optimismo", id: 28 },
   { description: "Eso es imprudente. Tiene suerte de que no se desfigurara o matara de forma permanente.", title: "optimismo", id: 29 },
   { description: "El juego ND vs Georgia en Atenas será bueno.", title: "admiración", id: 30 },
-  { description: "¡Bonito silbido!", title: "admiración", id: 31 },
-  { description: "Muy bien, jurando una tormenta justo delante de tus hijos.", title: "admiración", id: 32 },
-  { description: "Maravillosos esculturas. Me encanta la expresión de la mitología escocesa detrás de ellos.", title: "admiración", id: 33 },
-  { description: "Salud, amigo. ¡Votado!", title: "admiración", id: 34 },
+  { description: "¡Bonito silbido!", title: "admiracion", id: 31 },
+  { description: "Muy bien, jurando una tormenta justo delante de tus hijos.", title: "admiracion", id: 32 },
+  { description: "Maravillosos esculturas. Me encanta la expresión de la mitología escocesa detrás de ellos.", title: "admiracion", id: 33 },
+  { description: "Salud, amigo. ¡Votado!", title: "admiracion", id: 34 },
   { description: "¿Por qué se ven como sus máscaras de gas?", title: "distracion", id: 35 },
   {
     description:

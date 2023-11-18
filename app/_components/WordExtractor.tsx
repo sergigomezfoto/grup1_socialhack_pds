@@ -16,6 +16,7 @@ const cleanText = (text: string): string => {
 }
 const DocxReader: React.FC = () => {
     const [data, setData] = useState(null);
+    const [extText, setExtText] = useState(null);
 
     const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
         const file = event.target.files ? event.target.files[0] : null;
@@ -24,6 +25,8 @@ const DocxReader: React.FC = () => {
             mammoth.extractRawText({ arrayBuffer })
                 .then(result => {
                     console.log(cleanText(result.value)); // Mostra el text extret en el console log
+                    const txt=cleanText(result.value)
+                    setExtText(txt);
                     const textToPass = cleanText(result.value);
                     launchWordSentiments(textToPass).then((res) => {
                         console.log('log al final::',res.analizeSentiments);
@@ -39,8 +42,9 @@ const DocxReader: React.FC = () => {
 
     return (
         <>
-            <div className=" flex justify-start items-center flex-col">
+            <div className=" flex justify-start items-center flex-col m-6">
                 <input type="file" onChange={handleFileChange} accept=".docx" className="block" />
+                {(extText && !data) && <div className="my-6"> {extText}</div>}
             {data && <ReportComponent data={data} />}
             </div>
         </>

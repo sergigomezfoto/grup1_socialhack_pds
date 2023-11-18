@@ -9,30 +9,30 @@ body {
 
 }
 
-
 .ira {
   color: #000000;
-  background-color: #92B8BC;
+  background-color: #fe7370;
 }
 
 .confianza {
   color: #000000;
-  background-color: #EAB2D3;
+  background-color: #91de5e
+  ;
 }
 
 .neutral {
   color: #000000;
-  background-color: #E49A96;
+  background-color: #ffffff;
 }
 
 .vigilancia {
   color: #000000;
-  background-color: #C696AE;
+  background-color: #ff8001;
 }
 
 .tristeza {
   color: #000000;
-  background-color: #81B0C4;
+  background-color: #009bee;
 }
 
 .optimismo {
@@ -41,76 +41,81 @@ body {
 }
 
 .remordimiento {
-  color: #000000;
+  color: #4688df;
   background-color: #FBCCB1;
 }
 
 .admiracion {
   color: #000000;
-  background-color: #F48AC2;
+  background-color: #64c803;
 }
 
 .serenidad {
   color: #000000;
-  background-color: #E7C5E2;
+  background-color: #ffffbe;
 }
 
 .sorpresa {
   color: #000000;
-  background-color: #CA85D6;
+  background-color: #02cafd;
 }
 
 .asco {
   color: #000000;
-  background-color: #B1C3EA;
+  background-color: #a973d1;
 }
 
 .distracion {
   color: #000000;
-  background-color: #CCFBA6;
+  background-color: #cfeafe;
 }
 
 .pena {
   color: #000000;
-  background-color: #D584C9;
+  background-color: #0037da;
 }
 
 .amor {
   color: #000000;
-  background-color: #C6A6BF;
+  background-color: #dbe537;
 }
 
 .alegria {
   color: #000000;
-  background-color: #E9FB88;
+  background-color: #ffea00;
 }
 
 .asombro {
   color: #000000;
-  background-color: #C8D8D8;
+  background-color: #74b9ff;
 }
 
 .miedo {
   color: #000000;
-  background-color: #EBA290;
+  background-color: #00c279;
 }
 
 .decepcion {
   color: #000000;
-  background-color: #FB868C;
+  background-color: #a5bafe;
 }
 
 .extasis {
   color: #000000;
-  background-color: #9D8EDA;
+  background-color: #feff0b;
 }
 
 .aprobacion {
   color: #000000;
-  background-color: #AAF7F3;
+  background-color: #cbff9c;
 }
 
-.agresidad {
+.agresividad {
   color: #000000;
-  background-color: #FAD7A3;
+  background-color: #ff885e;
+}
+
+.alarm-content{
+  color:#ffffff;
+  background-color: #a03939;
 }

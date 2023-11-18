@@ -107,7 +107,7 @@ export async function POST(req: Request) {
 
     const store = await createStore();
 
-    const search = async (query, count = 1, delta = 0.006) => {
+    const search = async (query, count = 2, delta = 0.006) => {
         const results = await store.similaritySearchWithScore(query, count);
         const sortedResults = results.sort((a, b) => b[1] - a[1]);
         const mostSimilar = sortedResults[0];
