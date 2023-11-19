@@ -2,7 +2,7 @@ const ffmpeg = require('fluent-ffmpeg');
 const fs = require('fs');
 const axios = require('axios');
 
-const apiKey = "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";
+const apiKey = "";
 const inputVideoPath = 'videos/12.mp4';
 const outputAudioPath = 'audios/12.mp3';
 
