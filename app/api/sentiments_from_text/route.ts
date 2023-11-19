@@ -26,15 +26,15 @@ export async function POST(req: Request) {
             messages: [
                 {   //PROMPT AI
                     role: "system",
-                    content: `You are very reputed and espert psicologist, that can analyze and split a text by emotional transitions, avoiding segmenting based on grammatical indicators like commas or periods. You can also detect if the text denotes any alarm that indicates emotional disorders. Please divide the following text into segments based on changes in emotion. Use the format "segment || segment || segment" to indicate the importance of each segment, and separate multiple segments with "||".(Avoid segmenting based on grammatical indicators like commas or periods; prioritize emotional transitions instead). Think about which emotion is the dominant one for the entire text and evaluate each segment based on how well it represents that emotion.At the end of the text, add: *** very brief emotional summary of the text as a whole, not segmented. Include in ths emotional summary is si there any alarm in terms of emotional disorder. If you consider that there is any alarm follow the 'EXAMPLE (with alarms)' and divide the summary like this: summary|ALARM|alarms (write explicity '|ALARM|' to split the summary). otherwhise follow the 'EXAMPLE (without alarms)', and don't divide the summary.
+                    content: `You are very reputed and espert psicologist, that can analyze and split a text by emotional transitions, avoiding segmenting based on grammatical indicators like commas or periods. You can also detect if the text denotes any alarm that indicates emotional disorders. Please divide the following text into segments based on changes in emotion. Use the format "segment || segment || segment" to indicate the importance of each segment, and separate multiple segments with "||".(Avoid segmenting based on grammatical indicators like commas or periods; prioritize emotional transitions instead). Think about which emotion is the dominant one for the entire text and evaluate each segment based on how well it represents that emotion.At the end of the text, add: *** very brief emotional summary of the text as a whole, not segmented. Include in ths emotional summary is si there any alarm in terms of emotional disorder. If you consider that there is any alarm follow the 'EXAMPLE (with alarms)' and divide the summary like this: summary|ALARM|alarms (write explicity '|A|' to split the summary). otherwhise follow the 'EXAMPLE (without alarms)', and don't divide the summary.
                     
                     EXAMPLE (without alarms): user: I'm feeling very sad today, my friend is ill... but I'm going to the beach with my friends. I'm so excited! And Mary will come too,Im in love with her!
                     system: I'm feeling very sad today, my friend is ill...||but I'm going to the beach with my friends.I'm so excited!||And Mary will come too,Im in love with her! *** The text conveys joy and well-being. There are no notable alarms.
 
-                    EXAMPLE (with alarms): user: I'm feeling very sad today, my friend is ill... I love him a lot... life is so hard that I can't take it anymore!
-                    system: I'm feeling very sad today, my friend is ill...|| I love him a lot...||life is so hard that I can't take it anymore! *** The text denotes a lot of sadness due to a friend's illness. |ALARM| Depression and risks to integrity.
+                    EXAMPLE (with alarms): user: I'm feeling very sad today, my friend is ill... I love him a lot... life is so hard that I can't take it anymore, and I will kill somebody!
+                    system: I'm feeling very sad today, my friend is ill...|| I love him a lot...||life is so hard that I can't take it anymore! *** The text denotes a lot of sadness due to a friend's illness. |A| Depression and risks to integrity.
                     
-                    IMPORTANT: If you can't divide the text, return the same text with an importance score, but with the brief emotional summary. Your messge MUST BE in SPANISH.
+                    IMPORTANT: Consider as an alarm any expression that may signify harm to oneself or others, whether physically or emotionally. Your messge MUST BE in SPANISH.
                     `,
                 },
                 {
@@ -49,8 +49,8 @@ export async function POST(req: Request) {
         // OBTENCIO i DEPURACIO DEL L'OBJECTE
         const [mainContent, globalReport] = content.split('***');
         content = mainContent;
-        if (globalReport.includes('|ALARM|')) {
-            const parts = globalReport.split('|ALARM|');
+        if (globalReport.includes('|A|')) {
+            const parts = globalReport.split('|A|');
             finalReport.report = parts[0].trim();
             finalReport.alarm = parts[1].trim();
         } else {
