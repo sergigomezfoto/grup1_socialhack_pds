@@ -1,1 +1,1 @@
-export const baseApiUrl = process.env.FETCHING_ROUTE || 'http://localhost:3000';
+export const baseApiUrl = process.env.NEXT_PUBLIC_FETCHING_ROUTE || 'http://localhost:3000';
