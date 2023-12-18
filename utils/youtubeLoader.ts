@@ -1,6 +1,7 @@
 import { log } from 'console';
 
 import { Document } from "langchain/document";
+import { baseApiUrl } from './envorlocal';
 
 
 
@@ -41,7 +42,7 @@ interface Subtitle {
 
 export const scrapeYoutubeSubtitles = async (videoId: string) => {
 
-  const response = await fetch('api/youtubescraper', {
+  const response = await fetch(`${baseApiUrl}api/youtubescraper`, {
     method: 'POST',
     headers: {
         'Content-Type': 'application/json',

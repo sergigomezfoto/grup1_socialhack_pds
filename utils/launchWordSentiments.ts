@@ -1,6 +1,10 @@
+import { baseApiUrl } from "./envorlocal";
+
+
+
 const launchWordSentiments = async (word: string) => {
 
-    const response = await fetch('api/sentiments_from_text', {
+    const response = await fetch(`${baseApiUrl}/api/sentiments_from_text`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
