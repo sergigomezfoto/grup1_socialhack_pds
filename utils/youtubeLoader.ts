@@ -42,7 +42,7 @@ interface Subtitle {
 
 export const scrapeYoutubeSubtitles = async (videoId: string) => {
 
-  const response = await fetch(`${baseApiUrl}api/youtubescraper`, {
+  const response = await fetch(`${baseApiUrl}/api/youtubescraper`, {
     method: 'POST',
     headers: {
         'Content-Type': 'application/json',
